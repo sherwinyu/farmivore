@@ -1,4 +1,4 @@
-<% 
+<%
 
 	#-----------------------------------------DATA MODEL-----------------------------------------------#
 	title = "Wooster Square Farmers Market"
@@ -12,7 +12,7 @@
 
 
 	#a = Array of product results
-	#a0, farm name. a1, farmer name. A2, description. A3, tag. A4, category. A5, price A6, label. 
+	#a0, farm name. a1, farmer name. A2, description. A3, tag. A4, category. A5, price A6, label.
 	a = Array.new
 	a << ["Colton's Corner", "Jim", "Gala Apples", "Apples","Fruits", "$2/lb",""]
 	a << ["Colton's Corner", "Jim", "Macoun Apples", "Apples","Fruits", "$2.50/lb",""]
@@ -196,7 +196,7 @@
 <div class="row">
 	<div class="small-3 large-2 columns">
 		<div class="datestamp"><h5><%= "This week: " + thisweek %></h5></div>
-	</div>	
+	</div>
 	<div class="small-9 large-10 columns">
 		<h1><%= title %></h1>
 		<div class="placestamp"><p><%= time + ". " + address %></p></div>
@@ -204,9 +204,18 @@
 </div>
 
 <div class="row">
-	<div class="shoppinglist">
+  <table class="sortable" id='shopping-list'>
+      <tr>
+        <th><a href="#sort">Category</a></th>
+          <th><a href="#sort">Description</a></th>
+          <th><a href="#sort">Price (split into integer and unit)</a></th>
+          <th><a href="#sort">Method</a></th>
+          <th><a href="#sort">Farm</a></th>
+          <th>Add to your list</th>
+      </tr>
+    </table>
 		<div class="large-12 columns"><br /><br /><br /><br />Shopping list here.  Email myself. Share with a friend. Send to phone. <br /><br /><br /><br /><br /><br /></div>
-	</div>
+
 </div>
 
 <div class="row">
@@ -248,23 +257,23 @@
 				        <th><a href="#sort">Farm</a></th>
 				        <th>Add to your list</th>
 				    </tr>
-				    
+
 					<% #a0, farm name. a1, farmer name. A2, description. A3, tag. A4, category. A5, price A6, label. %>
 
 					<% a.each do |b| %>
-						<tr data-tag="<%= b[3] %>" data-category="<%= b[4] %>">
+						<tr class="listing" data-tag="<%= b[3] %>" data-category="<%= b[4] %>">
 							<td><%= b[4] %></td>
 							<td><%= b[2] %></td>
 							<td><%= b[5] %></td>
 							<td><%= b[6] %></td>
 							<td><a data-reveal-id="modal-<%= b[0][0..3]%>" href="#modal"><%= b[0] %></a></td>
-							<td><a href="#add">Plus button</a></td>
+							<td><a href="#add" class="add-button">Plus button</a></td>
 						</tr>
 					<% end %>
 				</table>
 			</div>
 		</div>
-		
+
 	</div>
 </div>
 
@@ -279,7 +288,7 @@
   		<li><%= image_tag "https://s3.amazonaws.com/farmivore/farm-photos/coltons-1.png" %></li>
   		<li><%= image_tag "https://s3.amazonaws.com/farmivore/farm-photos/coltons-2.png" %></li>
   	</ul>
-  </div> 
+  </div>
 </div>
 
 <div id="modal-Star" class="reveal-modal">
@@ -291,7 +300,7 @@
   	<ul class="small-block-grid-1">
   		<li><%= image_tag "https://s3.amazonaws.com/farmivore/farm-photos/starlight-logo.png" %></li>
   	</ul>
-  </div> 
+  </div>
 </div>
 
 <div id="modal-Suga" class="reveal-modal">
@@ -301,9 +310,9 @@
   <a class="close-reveal-modal">&#215;</a>
   <div class="row">
   	<ul class="small-block-grid-1">
-  		
+
   	</ul>
-  </div> 
+  </div>
 </div>
 
 <div id="modal-Blue" class="reveal-modal">
@@ -313,11 +322,11 @@
   <p>Blue Slope has over 200 very happy cows, heifers, and calves -- all Holsteins. They also have "mother raised" veal and goat meat. See <a href="http://www.blueslope.com">blueslope.com</a> for more information</p>
   <a class="close-reveal-modal">&#215;</a>
   <div class="row">
-  	<ul class="small-block-grid-1">	
+  	<ul class="small-block-grid-1">
   		<li><%= image_tag "https://s3.amazonaws.com/farmivore/farm-photos/blue-slope-logo.png" %></li>
 			<li><%= image_tag "https://s3.amazonaws.com/farmivore/farm-photos/blue-slope-1.png" %></li>
   	</ul>
-  </div> 
+  </div>
 </div>
 
 <div id="modal-Wald" class="reveal-modal">
@@ -328,11 +337,11 @@ We specialize in heirloom tomatoes and other specialty vegetables. </p>
 	<p>We have a CSA program and attend seasonal farmer's markets in New Haven (Wednesday & Saturday), Weston (Sat), Kent (Sat), and Sandy Hook (Tuesday). All are in CT.  See <a href="http://www.waldingfieldfarm.com">waldingfieldfarm.com</a> for more information</p>
   <a class="close-reveal-modal">&#215;</a>
   <div class="row">
-  	<ul class="small-block-grid-2">	
+  	<ul class="small-block-grid-2">
   		<li><%= image_tag "https://s3.amazonaws.com/farmivore/farm-photos/waldingfield-logo.png" %></li>
 			<li><%= image_tag "https://s3.amazonaws.com/farmivore/farm-photos/waldingfield-1.png" %></li>
   	</ul>
-  </div> 
+  </div>
 </div>
 
 <div id="modal-Ston" class="reveal-modal">
@@ -342,26 +351,26 @@ We specialize in heirloom tomatoes and other specialty vegetables. </p>
 	<p>Fred and Stacia Monahan founded Stone Gardens Farm in 1998, after expanding from a roadside vegetable stand where they sold vegetables and flowers at Shelton’s Dairy on Birdseye Road in Shelton. The couple steadily grew their business, planting more varieties of vegetables on mostly leased land. See <a href="http://www.stonegardensfarm.com">stonegardensfarm.com</a> for more information</p>
   <a class="close-reveal-modal">&#215;</a>
   <div class="row">
-  	<ul class="small-block-grid-2">	
+  	<ul class="small-block-grid-2">
   		<li><%= image_tag "https://s3.amazonaws.com/farmivore/farm-photos/stone-gardens-logo.png" %></li>
   	</ul>
-  </div> 
+  </div>
 </div>
 
 <div id="modal-True" class="reveal-modal">
   <h2>True Love Farms</h2>
   <p class="lead">122 Thomaston Rd, Morris, CT 06763</p>
-  <p>The pork at True Love Farms comes from heritage-hybrid pigs born and raised on the farm. Their Tamworth boars and Berkshire-cross sows produce muscular, hearty hogs who do well outdoors. They also produce lean and flavorful beef fed only on grasses and legumes from their fields.  They apply no pesticides, herbicides, or chemical fertilizers to their pastures, and their cattle are completely hormone and antibiotic free. </p> 
+  <p>The pork at True Love Farms comes from heritage-hybrid pigs born and raised on the farm. Their Tamworth boars and Berkshire-cross sows produce muscular, hearty hogs who do well outdoors. They also produce lean and flavorful beef fed only on grasses and legumes from their fields.  They apply no pesticides, herbicides, or chemical fertilizers to their pastures, and their cattle are completely hormone and antibiotic free. </p>
 
   <p> See <a href="http://www.truelovefarms.org">truelovefarms.org</a> for more information</p>
   <a class="close-reveal-modal">&#215;</a>
   <div class="row">
-  	<ul class="small-block-grid-2">	
+  	<ul class="small-block-grid-2">
   		<li><%= image_tag "https://s3.amazonaws.com/farmivore/farm-photos/truelove-1.png" %></li>
   		<li><%= image_tag "https://s3.amazonaws.com/farmivore/farm-photos/truelove-2.png" %></li>
 
   	</ul>
-  </div> 
+  </div>
 </div>
 
 <div id="modal-Nort" class="reveal-modal">
@@ -371,11 +380,11 @@ We specialize in heirloom tomatoes and other specialty vegetables. </p>
   <p>We are Certified Naturally Grown, use nutrient dense growing practices and are also members of the CT Chapter of the Northeast Organic Farming Association (NOFA) and sign their Farmers’ Pledge. </p>
   <a class="close-reveal-modal">&#215;</a>
     <div class="row">
-  	<ul class="small-block-grid-2">	
+  	<ul class="small-block-grid-2">
   		<li><%= image_tag "https://s3.amazonaws.com/farmivore/farm-photos/northfordy-1.png" %></li>
   		<li><%= image_tag "https://s3.amazonaws.com/farmivore/farm-photos/northfordy-2.png" %></li>
 
   	</ul>
-  </div> 
+  </div>
 </div>
 
